@@ -28,7 +28,7 @@ And you are good to go!
 Running the main file with `python3`
 
 ```bash
-python3 index.py
+python3 src/index.py
 ```
 
 # Adding Packages

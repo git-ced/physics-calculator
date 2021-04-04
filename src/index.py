@@ -61,3 +61,32 @@ def coulombs_law(**given):
     # Unable to solve the problem
     else:
         pass
+
+
+def electric_field_2d(F1, F2):
+    angle = math.atan(12 / 5)
+
+    exp = math.cos(angle) * F1
+    eyp = math.sin(angle) * F1
+    exn = math.cos(angle) * F2
+    eyn = math.sin(angle) * F2
+
+    esumx = exp + exn
+    esumy = eyp + eyn
+
+    enet_magni = math.sqrt((esumx ** 2) + (esumy ** 2))
+    enet_angle = math.atan(esumy / esumx)
+
+    return {
+        'EP': F1,
+        'EN': F2,
+        'ANGLE': angle,
+        'EXP': exp,
+        'EYP': eyp,
+        'EXN': exn,
+        'EYN': eyn,
+        'ESUMX': esumx,
+        'ESUMY': esumy,
+        'ENET MAGNITUDE': enet_magni,
+        'ENET ANGLE': enet_angle,
+    }

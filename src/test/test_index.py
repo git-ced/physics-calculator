@@ -1,5 +1,5 @@
 import unittest
-from src.index import coulombs_law
+from src.index import coulombs_law, electric_field_2d
 
 
 class TestCoulomb(unittest.TestCase):
@@ -30,3 +30,21 @@ class TestCoulomb(unittest.TestCase):
     def test_incomplete_given(self):
         result = coulombs_law(q1='-0.0561875 base', r='2.0 base')
         self.assertEqual(result, None)
+
+
+class TestElectricField2D(unittest.TestCase):
+    def test_electric_field_2d(self):
+        ep = coulombs_law(q1='14n', q2='1', r='13c', k=(8.9876 * 1e9))
+        en = coulombs_law(q1='-17n', q2='1', r='13c', k=(8.9876 * 1e9))
+        result = electric_field_2d(ep, en)
+        self.assertEqual(result['EP'], 7445.349112426035)
+        self.assertEqual(result['EN'], -9040.781065088757)
+        self.assertEqual(result['ANGLE'], 1.176005207095135)
+        self.assertEqual(result['EXP'], 2863.5958124715526)
+        self.assertEqual(result['EYP'], 6872.629949931725)
+        self.assertEqual(result['EXN'], -3477.2234865725995)
+        self.assertEqual(result['EYN'], -8345.336367774236)
+        self.assertEqual(result['ESUMX'], -613.627674101047)
+        self.assertEqual(result['ESUMY'], -1472.7064178425117)
+        self.assertEqual(result['ENET MAGNITUDE'], 1595.4319526627212)
+        self.assertEqual(result['ENET ANGLE'], 1.1760052070951348)

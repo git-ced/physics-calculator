@@ -31,6 +31,14 @@ Running the main file with `python3`
 python3 src/index.py
 ```
 
+# Testing the code
+
+Running all test cases with `unittest`
+
+```bash
+python3 -m unittest discover -s src/test -t src
+```
+
 # Adding Packages
 
 Installing a package with `pip`

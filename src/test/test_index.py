@@ -1,4 +1,5 @@
 import unittest
+import math
 from src.index import coulombs_law, electric_field_2d
 
 
@@ -34,9 +35,10 @@ class TestCoulomb(unittest.TestCase):
 
 class TestElectricField2D(unittest.TestCase):
     def test_electric_field_2d(self):
+        angle = math.atan(12 / 5)
         ep = coulombs_law(q1='14n', q2='1', r='13c', k=(8.9876 * 1e9))
         en = coulombs_law(q1='-17n', q2='1', r='13c', k=(8.9876 * 1e9))
-        result = electric_field_2d(ep, en, 'center', 'top')
+        result = electric_field_2d(ep, en, angle, 'center', 'top')
         self.assertEqual(result['EP'], 7445.349112426035)
         self.assertEqual(result['EN'], -9040.781065088757)
         self.assertEqual(result['ANGLE'], 1.176005207095135)

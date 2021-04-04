@@ -63,13 +63,28 @@ def coulombs_law(**given):
         pass
 
 
-def electric_field_2d(F1, F2):
+def electric_field_2d(F1, F2, position_x='center', position_y='middle'):
     angle = math.atan(12 / 5)
 
-    exp = math.cos(angle) * F1
-    eyp = math.sin(angle) * F1
-    exn = math.cos(angle) * F2
-    eyn = math.sin(angle) * F2
+    if (position_x == 'right'):
+        exp = math.cos(angle) * F1
+        exn = math.cos(angle) * F2
+    elif (position_x == 'left'):
+        exp = -(math.cos(angle) * F1)
+        exn = -(math.cos(angle) * F2)
+    else:
+        exp = math.cos(angle) * F1
+        exn = -(math.cos(angle) * F2)
+
+    if (position_y == 'top'):
+        eyp = math.sin(angle) * F1
+        eyn = math.sin(angle) * F2
+    elif (position_y == 'bottom'):
+        eyp = -(math.sin(angle) * F1)
+        eyn = -(math.sin(angle) * F2)
+    else:
+        eyp = math.sin(angle) * F1
+        eyn = -(math.sin(angle) * F2)
 
     esumx = exp + exn
     esumy = eyp + eyn

@@ -131,12 +131,6 @@ def electric_flux(**given):
     if (E and A and phi and not Flux):
         flux = unit.base(E) * unit.base(A) * math.cos(math.radians(phi))
         return flux
-    # Angle phi is missing
-    elif (Flux and E and A and not phi):
-        denominator = unit.base(E) * unit.base(A)
-        result = Flux / denominator
-        angle = math.degrees(math.acos(result))
-        return angle
     # Area is missing
     elif (Flux and E and phi and not A):
         denominator = unit.base(E) * math.cos(math.radians(phi))

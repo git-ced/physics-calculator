@@ -119,3 +119,34 @@ def gauss_law(**given):
     # Unable to solve the problem
     else:
         pass
+
+
+def electric_flux(**given):
+    Flux = given.get('I')
+    E = given.get('E')
+    A = given.get('A')
+    phi = given.get('phi')
+
+    # Flux is missing
+    if (E and A and phi and not Flux):
+        flux = unit.base(E) * unit.base(A) * math.cos(math.radians(phi))
+        return flux
+    # Angle phi is missing
+    elif (Flux and E and A and not phi):
+        denominator = unit.base(E) * unit.base(A)
+        result = Flux / denominator
+        angle = math.degrees(math.acos(result))
+        return angle
+    # Area is missing
+    elif (Flux and E and phi and not A):
+        denominator = unit.base(E) * math.cos(math.radians(phi))
+        area = Flux / denominator
+        return area
+    # Magnitude of the electric field is missing
+    elif (Flux and A and phi and not E):
+        denominator = unit.base(A) * math.cos(math.radians(phi))
+        magnitude = Flux / denominator
+        return magnitude
+    # Unable to solve the problem
+    else:
+        pass

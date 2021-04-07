@@ -66,3 +66,21 @@ class TestGauss(unittest.TestCase):
     def test_incomplete_given(self):
         result = calculate.gauss_law()
         self.assertEqual(result, None)
+
+
+class TestElectricFlux(unittest.TestCase):
+    def test_flux(self):
+        result = calculate.electric_flux(E='3u', A='9', phi=60)
+        self.assertEqual(result, 1.3500000000000003e-5)
+
+    def test_area(self):
+        result = calculate.electric_flux(E='3u', I=321321, phi=60)
+        self.assertEqual(result, 214213999999.99994)
+
+    def test_magnitude(self):
+        result = calculate.electric_flux(A='9', I=321321, phi=60)
+        self.assertEqual(result, 71404.66666666666)
+
+    def test_incomplete_given(self):
+        result = calculate.electric_flux(I=32)
+        self.assertEqual(result, None)

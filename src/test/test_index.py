@@ -1,44 +1,46 @@
 import unittest
 import math
-from src.index import coulombs_law, electric_field_2d
+import index as calculate
 
 
 class TestCoulomb(unittest.TestCase):
     def test_both_charge(self):
-        result = coulombs_law(F='-0.0561875 base', r='2.0 base')
+        result = calculate.coulombs_law(F='-0.0561875 base', r='2.0 base')
         self.assertEqual(result['product charges'], -2.5e-11)
         self.assertEqual(result['each charge'], 5e-6)
 
     def test_electric_force(self):
-        result = coulombs_law(q1='5 u', q2='-5 u', r='2.0 base')
+        result = calculate.coulombs_law(q1='5 u', q2='-5 u', r='2.0 base')
         self.assertEqual(result, -0.05618749999999999)
 
     def test_first_charge(self):
-        result = coulombs_law(
+        result = calculate.coulombs_law(
             q1='5 u', F='-0.0561875 base', r='2.0 base')
         self.assertAlmostEqual(result, -5e-6)
 
     def test_second_charge(self):
-        result = coulombs_law(
+        result = calculate.coulombs_law(
             q2='-5 u', F='-0.0561875 base', r='2.0 base')
         self.assertAlmostEqual(result, 5e-6)
 
     def test_return_charge(self):
-        result = coulombs_law(
+        result = calculate.coulombs_law(
             q1='5 u', q2='-5 u', F='-0.0561875 base')
         self.assertAlmostEqual(result, 2.0)
 
     def test_incomplete_given(self):
-        result = coulombs_law(q1='-0.0561875 base', r='2.0 base')
+        result = calculate.coulombs_law(q1='-0.0561875 base', r='2.0 base')
         self.assertEqual(result, None)
 
 
 class TestElectricField2D(unittest.TestCase):
     def test_electric_field_2d(self):
         angle = math.atan(12 / 5)
-        ep = coulombs_law(q1='14n', q2='1', r='13c', k=(8.9876 * 1e9))
-        en = coulombs_law(q1='-17n', q2='1', r='13c', k=(8.9876 * 1e9))
-        result = electric_field_2d(ep, en, angle, 'center', 'top')
+        ep = calculate.coulombs_law(
+            q1='14n', q2='1', r='13c', k=(8.9876 * 1e9))
+        en = calculate.coulombs_law(
+            q1='-17n', q2='1', r='13c', k=(8.9876 * 1e9))
+        result = calculate.electric_field_2d(ep, en, angle, 'center', 'top')
         self.assertEqual(result['EP'], 7445.349112426035)
         self.assertEqual(result['EN'], -9040.781065088757)
         self.assertEqual(result['ANGLE'], 1.176005207095135)
@@ -50,3 +52,17 @@ class TestElectricField2D(unittest.TestCase):
         self.assertEqual(result['ESUMY'], -1472.7064178425117)
         self.assertEqual(result['ENET MAGNITUDE'], 6509.5970363982815)
         self.assertEqual(result['ENET ANGLE'], -0.22821194179065718)
+
+
+class TestGauss(unittest.TestCase):
+    def test_flux(self):
+        result = calculate.gauss_law(Q='3u')
+        self.assertEqual(result, 338829.907386492)
+
+    def test_charge(self):
+        result = calculate.gauss_law(I=338829.907386492)
+        self.assertEqual(result, 3e-6)
+
+    def test_incomplete_given(self):
+        result = calculate.gauss_law()
+        self.assertEqual(result, None)

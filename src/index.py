@@ -103,3 +103,19 @@ def electric_field_2d(F1, F2, angle, position_x='center', position_y='middle'):
         'ENET MAGNITUDE': enet_magni,
         'ENET ANGLE': enet_angle,
     }
+
+
+def gauss_law(**given):
+    Eo = given.get('Eo', 8.854 * 1e-12)
+    Flux = given.get('I')
+    Q = given.get('Q')
+
+    # Flux is missing
+    if (Q and not Flux):
+        return unit.base(Q) / Eo
+    # Charge is missing
+    if (Flux and not Q):
+        return Flux * Eo
+    # Unable to solve the problem
+    else:
+        pass

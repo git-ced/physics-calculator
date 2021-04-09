@@ -84,3 +84,25 @@ class TestElectricFlux(unittest.TestCase):
     def test_incomplete_given(self):
         result = calculate.electric_flux(I=32)
         self.assertEqual(result, None)
+
+
+class TestLineOfCharge(unittest.TestCase):
+    def test_electric_field(self):
+        result = calculate.line_of_charge(Q='0.4', L='1', r='0.25')
+        self.assertEqual(result, 28760775801.562298)
+
+    def test_charge(self):
+        result = calculate.line_of_charge(E=2*1e11, L='1', r='0.25')
+        self.assertEqual(result, 2.7815661354884025)
+
+    def test_length(self):
+        result = calculate.line_of_charge(E=2*1e11, Q='1', r='0.25')
+        self.assertEqual(result, 0.3595096975195287)
+
+    def test_length(self):
+        result = calculate.line_of_charge(E=2*1e11, Q='1', L='0.25')
+        self.assertEqual(result, 0.3595096975195287)
+
+    def test_incomplete_given(self):
+        result = calculate.line_of_charge(E=32)
+        self.assertEqual(result, None)

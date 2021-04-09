@@ -144,3 +144,32 @@ def electric_flux(**given):
     # Unable to solve the problem
     else:
         pass
+
+
+def line_of_charge(**given):
+    Eo = given.get('Eo', 8.854 * 1e-12)
+    Q = given.get('Q')
+    L = given.get('L')
+    r = given.get('r')
+    E = given.get('E')
+
+    # Electric field is missing
+    if (not E and Q and L and r):
+        line_charge_density = unit.base(Q) / unit.base(L)
+        denominator = 2 * math.pi * Eo * unit.base(r)
+        return line_charge_density / denominator
+    # Charge is missing
+    elif (not Q and E and L and r):
+        return E * 2 * math.pi * Eo * unit.base(r) * unit.base(L)
+    # Length is missing
+    elif (not L and Q and E and r):
+        denominator = E * 2 * math.pi * Eo * unit.base(r)
+        return unit.base(Q) / denominator
+    # distance is missing
+    elif (not r and Q and E and L):
+        line_charge_density = unit.base(Q) / unit.base(L)
+        denominator = E * 2 * math.pi * Eo
+        return line_charge_density / denominator
+    # Unable to solve the problem
+    else:
+        pass

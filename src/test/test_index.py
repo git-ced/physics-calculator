@@ -106,3 +106,21 @@ class TestLineOfCharge(unittest.TestCase):
     def test_incomplete_given(self):
         result = calculate.line_of_charge(E=32)
         self.assertEqual(result, None)
+
+
+class TestElectricPotential(unittest.TestCase):
+    def test_electric_potential(self):
+        result = calculate.electric_potential(r='4.5', Q='1.6n')
+        self.assertEqual(result, 3.196444444444445)
+
+    def test_distance(self):
+        result = calculate.electric_potential(V='4.5', Q='1.6n')
+        self.assertEqual(result, 3.196444444444445)
+
+    def test_charge(self):
+        result = calculate.electric_potential(V='4.5', r='1.6n')
+        self.assertEqual(result, 8.008898776418244e-19)
+
+    def test_incomplete_given(self):
+        result = calculate.electric_potential(r=32)
+        self.assertEqual(result, None)

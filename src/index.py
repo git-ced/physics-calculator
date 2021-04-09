@@ -173,3 +173,23 @@ def line_of_charge(**given):
     # Unable to solve the problem
     else:
         pass
+
+
+def electric_potential(**given):
+    k = given.get('k', 8.99 * 1e9)
+    Q = given.get('Q')
+    r = given.get('r')
+    V = given.get('V')
+
+    # Electric potential is missing
+    if (not V and Q and r):
+        return (k * unit.base(Q)) / unit.base(r)
+    # Charge is missing
+    elif (not Q and V and r):
+        return (unit.base(V) * unit.base(r)) / k
+    # Distance is missing
+    elif (not r and Q and V):
+        return (k * unit.base(Q)) / unit.base(V)
+    # Unable to solve the problem
+    else:
+        pass
